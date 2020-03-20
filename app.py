@@ -4,27 +4,27 @@ import pickle
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return 'Hello!'
-
+# @app.route('/')
+# def index():
+#     return 'Hello!'
+#
 
 # allow both GET and POST requests
-@app.route('/classify-text', methods=['GET', 'POST'])
-def classify_text():
+@app.route('/', methods=['GET', 'POST'])
+def index():
     # this block is only entered when the form is submitted
     if request.method == 'POST':
-       # try:
-        usertex = request.form.get('message')
-        # loading trained model
-        filename = 'logistic_regression.sav'
-        loaded_model = pickle.load(open(filename, 'rb'))
-        # classifying text
-        classified_category = loaded_model.predict([usertex])
-        results = {'category': classified_category[0], 'text': usertex, }
-        return jsonify(results)
-        #except Exception:
-         #   return "Something went wrong"
+        try:
+            usertex = request.form.get('message')
+            # loading trained model
+            filename = 'logistic_regression.sav'
+            loaded_model = pickle.load(open(filename, 'rb'))
+            # classifying text
+            classified_category = loaded_model.predict([usertex])
+            results = {'category': classified_category[0], 'text': usertex, }
+            return jsonify(results)
+        except Exception:
+            return "Something went wrong"
 
     return '''<form method="POST">
                       Message: <input type="text" name="message"><br>
