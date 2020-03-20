@@ -14,17 +14,17 @@ def index():
 def classify_text():
     # this block is only entered when the form is submitted
     if request.method == 'POST':
-        try:
-            usertex = request.form.get('message')
-            # loading trained model
-            filename = 'logistic_regression.sav'
-            loaded_model = pickle.load(open(filename, 'rb'))
-            # classifying text
-            classified_category = loaded_model.predict([usertex])
-            results = {'category': classified_category[0], 'text': usertex, }
-            return jsonify(results)
-        except Exception:
-            return "Something went wrong"
+       # try:
+        usertex = request.form.get('message')
+        # loading trained model
+        filename = 'logistic_regression.sav'
+        loaded_model = pickle.load(open(filename, 'rb'))
+        # classifying text
+        classified_category = loaded_model.predict([usertex])
+        results = {'category': classified_category[0], 'text': usertex, }
+        return jsonify(results)
+        #except Exception:
+         #   return "Something went wrong"
 
     return '''<form method="POST">
                       Message: <input type="text" name="message"><br>
