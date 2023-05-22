@@ -8,5 +8,5 @@ notebook==6.0.1
 numpy==1.15.4
 pep8==1.7.1
 pickleshare==0.7.5
-requests==2.21.0
+requests==2.31.0
 sklearn
